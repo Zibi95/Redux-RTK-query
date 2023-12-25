@@ -1,8 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
+import { GoSync } from 'react-icons/go';
 
-interface ButtonProps extends React.HtmlHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
+  loading?: boolean;
   primary?: boolean;
   secondary?: boolean;
   success?: boolean;
@@ -22,6 +24,7 @@ function Button({
   danger,
   outline,
   rounded,
+  loading,
   ...rest
 }: ButtonProps) {
   const buttonTypes = [primary, secondary, success, warning, danger, outline];
@@ -37,6 +40,7 @@ function Button({
     rest.className,
     'flex items-center px-3 py-1.5 border',
     {
+      'opacity-80': loading,
       'border-blue-500 bg-blue-500 text-white': primary,
       'border-gray-900 bg-gray-900 text-white': secondary,
       'border-green-500 bg-green-500 text-white': success,
@@ -53,8 +57,8 @@ function Button({
   );
 
   return (
-    <button {...rest} className={classes}>
-      {children}
+    <button disabled={loading} {...rest} className={classes}>
+      {loading ? <GoSync className='animate-spin' /> : children}
     </button>
   );
 }

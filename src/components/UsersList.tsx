@@ -1,28 +1,44 @@
 import { useEffect } from 'react';
-import { AppDispatch, fetchUsers } from '../store';
-import { useDispatch } from 'react-redux';
+import { addUser, fetchUsers } from '../store';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import SkeletonLoader from './SkeletonLoader';
+import Button from './Button';
+import useThunk from '../hooks/useThunk';
+import UsersListItem from './UsersListItem';
 
 const UsersList = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const { isLoading, error, data } = useTypedSelector((state) => state.users);
-
-  console.log(isLoading, error, data);
+  const { data } = useTypedSelector((state) => state.users);
+  const [fetchUsersHandler, isLoadingUsers, errorUsers] = useThunk(fetchUsers);
+  const [addUserHandler, isAddingUser, addUserError] = useThunk(addUser);
 
   useEffect(() => {
-    dispatch(fetchUsers());
-  }, [dispatch]);
+    fetchUsersHandler();
+  }, [fetchUsersHandler]);
 
-  if (isLoading) {
-    return <SkeletonLoader className='h-10 w-full' times={6} />;
+  const handleUserAdd = () => {
+    addUserHandler();
+  };
+
+  let content: JSX.Element | JSX.Element[];
+  if (isLoadingUsers) {
+    content = <SkeletonLoader className='h-10 w-full' times={6} />;
+  } else if (errorUsers) {
+    content = <div>{errorUsers.message}</div>;
+  } else {
+    content = data.map((user) => <UsersListItem key={user.id} user={user} />);
   }
 
-  if (!isLoading && error) {
-    return <div>{error.message}</div>;
-  }
-
-  return <div>Data</div>;
+  return (
+    <div>
+      <div className='flex m-2 items-center justify-between'>
+        <h1 className='text-xl'>Users</h1>
+        <Button loading={isAddingUser} onClick={handleUserAdd}>
+          Add user
+        </Button>
+      </div>
+      {content}
+    </div>
+  );
 };
 
 export default UsersList;
