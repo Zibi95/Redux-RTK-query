@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { AppDispatch, fetchUsers } from '../store';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../hooks/useTypedSelector';
+import SkeletonLoader from './SkeletonLoader';
 
 const UsersList = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -14,7 +15,7 @@ const UsersList = () => {
   }, [dispatch]);
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return <SkeletonLoader className='h-10 w-full' times={6} />;
   }
 
   if (!isLoading && error) {
