@@ -2,7 +2,7 @@ import classNames from 'classnames';
 
 interface SkeletonLoaderProps {
   times?: number;
-  className: string;
+  className?: string;
 }
 
 const SkeletonLoader = ({ times = 1, className }: SkeletonLoaderProps) => {

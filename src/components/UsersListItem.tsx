@@ -1,27 +1,38 @@
+import { GoTrash } from 'react-icons/go';
+
 import useThunk from '../hooks/useThunk';
 import { removeUser } from '../store';
 import { User } from '../store/slices/userSlice';
+import Button from './Button';
+import ExpandablePanel from './ExpandablePanel';
+import AlbumsList from './AlbumsList';
 
 interface UsersListItemProps {
   user: User;
 }
 
 const UsersListItem = ({ user }: UsersListItemProps) => {
-  const [deleteUserHandler, isDeletingUser, deleteUserError] =
-    useThunk(removeUser);
+  const [deleteUserHandler, isDeletingUser] = useThunk(removeUser);
 
   const { name, id } = user;
 
-  return (
-    <div
-      onClick={() => deleteUserHandler(id)}
-      key={id}
-      className='mb-2 border rounded'
-    >
-      <div className='flex cursor-pointer p-2 justify-between items-center'>
-        {name}
-      </div>
+  const handleClick = () => {
+    deleteUserHandler(id);
+  };
+
+  const header = (
+    <div className='flex gap-3'>
+      <Button loading={isDeletingUser} danger rounded onClick={handleClick}>
+        <GoTrash />
+      </Button>
+      {name}
     </div>
+  );
+
+  return (
+    <ExpandablePanel header={header}>
+      <AlbumsList user={user} />
+    </ExpandablePanel>
   );
 };
 
