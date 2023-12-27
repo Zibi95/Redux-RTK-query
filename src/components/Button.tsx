@@ -37,7 +37,7 @@ function Button({
 
   const classes = classNames(
     rest.className,
-    'flex items-center px-3 py-1.5 border',
+    'flex items-center justify-center px-3 py-1.5 border',
     {
       'opacity-80': loading,
       'border-blue-500 bg-blue-500 text-white': primary,
@@ -57,7 +57,7 @@ function Button({
 
   return (
     <button disabled={loading} {...rest} className={classes}>
-      {loading ? <GoSync className='animate-spin' /> : children}
+      {loading ? <GoSync className='text-xl animate-spin' /> : children}
     </button>
   );
 }

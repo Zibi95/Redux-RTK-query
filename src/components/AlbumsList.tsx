@@ -35,7 +35,11 @@ const AlbumsList = ({ user }: AlbumsListProps) => {
     <div>
       <div className='m-2 flex items-center justify-between'>
         <div className='text-lg font-bold'>Albums for {user.name}</div>
-        <Button loading={isAddingAlbum} onClick={handleAddAlbum}>
+        <Button
+          className='w-40 h-10'
+          loading={isAddingAlbum}
+          onClick={handleAddAlbum}
+        >
           + Add album
         </Button>
       </div>

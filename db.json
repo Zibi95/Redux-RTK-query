@@ -1,5 +1,76 @@
 {
-  "users": [],
-  "albums": [],
-  "photos": []
+  "users": [
+    {
+      "name": "Brooke Hoeger",
+      "id": 4
+    },
+    {
+      "name": "Kerry Corwin",
+      "id": 5
+    }
+  ],
+  "albums": [
+    {
+      "userId": 5,
+      "title": "Luxurious Frozen Sausages",
+      "id": 23
+    },
+    {
+      "userId": 4,
+      "title": "Ergonomic Soft Chips",
+      "id": 27
+    },
+    {
+      "userId": 4,
+      "title": "Rustic Metal Hat",
+      "id": 28
+    },
+    {
+      "userId": 4,
+      "title": "Oriental Fresh Keyboard",
+      "id": 29
+    }
+  ],
+  "photos": [
+    {
+      "albumId": 23,
+      "url": "https://loremflickr.com/150/150?lock=2089873311793152",
+      "id": 10
+    },
+    {
+      "albumId": 23,
+      "url": "https://loremflickr.com/150/150?lock=3564236282265600",
+      "id": 11
+    },
+    {
+      "albumId": 23,
+      "url": "https://picsum.photos/seed/4HCIU1cm/150/150",
+      "id": 12
+    },
+    {
+      "albumId": 28,
+      "url": "https://loremflickr.com/150/150?lock=6968657953423360",
+      "id": 15
+    },
+    {
+      "albumId": 28,
+      "url": "https://picsum.photos/seed/AzXAQ/150/150",
+      "id": 16
+    },
+    {
+      "albumId": 27,
+      "url": "https://picsum.photos/seed/7OXOHxVMI/150/150",
+      "id": 17
+    },
+    {
+      "albumId": 27,
+      "url": "https://loremflickr.com/150/150?lock=5255465831235584",
+      "id": 23
+    },
+    {
+      "albumId": 27,
+      "url": "https://picsum.photos/seed/3xpbdhxXo9/150/150",
+      "id": 24
+    }
+  ]
 }

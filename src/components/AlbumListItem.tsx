@@ -3,6 +3,7 @@ import Button from './Button';
 import ExpandablePanel from './ExpandablePanel';
 import { Album } from '../store/apis/alubmsApi';
 import { useRemoveAlbumMutation } from '../store';
+import PhotosList from './PhotosList';
 
 interface AlbumListItemProps {
   album: Album;
@@ -28,7 +29,7 @@ const AlbumListItem = ({ album }: AlbumListItemProps) => {
 
   return (
     <ExpandablePanel key={id} header={header}>
-      List of photos
+      <PhotosList album={album} />
     </ExpandablePanel>
   );
 };
