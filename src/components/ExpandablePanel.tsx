@@ -2,10 +2,14 @@ import { PropsWithChildren, useState } from 'react';
 import { GoChevronDown, GoChevronLeft } from 'react-icons/go';
 import Button from './Button';
 
+interface ExpendablePanelProps {
+  header: JSX.Element;
+}
+
 const ExpandablePanel = ({
   header,
   children,
-}: PropsWithChildren<{ header: JSX.Element }>) => {
+}: PropsWithChildren<ExpendablePanelProps>) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleClick = () => {

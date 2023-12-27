@@ -1,6 +1,7 @@
-import { useFetchAlbumsQuery } from '../store';
+import { useAddAlbumMutation, useFetchAlbumsQuery } from '../store';
 import { User } from '../store/slices/userSlice';
-import ExpandablePanel from './ExpandablePanel';
+import AlbumListItem from './AlbumListItem';
+import Button from './Button';
 import SkeletonLoader from './SkeletonLoader';
 
 interface AlbumsListProps {
@@ -8,24 +9,37 @@ interface AlbumsListProps {
 }
 
 const AlbumsList = ({ user }: AlbumsListProps) => {
-  const { data, error, isLoading } = useFetchAlbumsQuery(user);
+  const {
+    data,
+    error,
+    isFetching: isLoadingAlbums,
+  } = useFetchAlbumsQuery(user);
+  const [addAlbum, { isLoading: isAddingAlbum }] = useAddAlbumMutation();
+
+  const handleAddAlbum = () => {
+    addAlbum(user);
+  };
 
   let content;
-  if (isLoading) {
-    content = <SkeletonLoader times={3} />;
+  if (isLoadingAlbums) {
+    content = <SkeletonLoader className='h-10 w-full' times={3} />;
   } else if (error) {
     content = <div>Error loading albums.</div>;
   } else {
-    content = data?.map(({ id, title }) => (
-      <ExpandablePanel key={id} header={<div>{title}</div>}>
-        List of photos
-      </ExpandablePanel>
+    content = data?.map((album) => (
+      <AlbumListItem key={album.id} album={album} />
     ));
   }
 
   return (
     <div>
-      <div>Albums for {user.name}</div>
+      <div className='m-2 flex items-center justify-between'>
+        <div className='text-lg font-bold'>Albums for {user.name}</div>
+        <Button loading={isAddingAlbum} onClick={handleAddAlbum}>
+          + Add album
+        </Button>
+      </div>
+
       <div>{content}</div>
     </div>
   );

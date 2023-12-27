@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import { addUser, fetchUsers } from '../store';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import SkeletonLoader from './SkeletonLoader';
@@ -32,7 +33,7 @@ const UsersList = () => {
     <div>
       <div className='flex m-2 items-center justify-between'>
         <h1 className='text-xl'>Users</h1>
-        <Button loading={isAddingUser} onClick={handleUserAdd}>
+        <Button success loading={isAddingUser} onClick={handleUserAdd}>
           Add user
         </Button>
       </div>
